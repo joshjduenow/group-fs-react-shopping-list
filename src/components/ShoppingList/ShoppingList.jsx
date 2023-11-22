@@ -1,15 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
+import ShoppingItem from "../ShoppingItem/ShoppingItem";
 
-function ShoppingList({ shoppingList },e) {
-    e.target;
+function ShoppingList({ shoppingList }, e) {
+  e.target;
   const [isTogglePurchased, setTogglePurchased] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
-//   const togglePurchased = (e) => {
-//     console.log(e.target);
-//     // if (shoppingList.find(true)) setTogglePurchased(!isTogglePurchased);
-//   };
+  //   const togglePurchased = (e) => {
+  //     console.log(e.target);
+  //     // if (shoppingList.find(true)) setTogglePurchased(!isTogglePurchased);
+  //   };
 
   const displayPurchased = () => {
     if (isTogglePurchased) {
@@ -35,7 +36,7 @@ function ShoppingList({ shoppingList },e) {
   return (
     <>
       <div>
-        <button onClick={togglePurchased(e)}>Reset</button>
+        <button>Reset</button>
         <button>Clear Cart</button>
       </div>
       <table>
@@ -49,14 +50,7 @@ function ShoppingList({ shoppingList },e) {
         </thead>
         <tbody>
           {shoppingList.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.quantity}</td>
-              <td>{item.unit}</td>
-              <td className={item.purchased ? "purchased" : ""}>
-                {displayPurchased()}
-              </td>
-            </tr>
+            <ShoppingItem key={item.id} item={item} />
           ))}
         </tbody>
       </table>
