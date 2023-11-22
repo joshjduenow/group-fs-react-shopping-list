@@ -6,6 +6,9 @@ import axios from "axios";
 
 function App() {
   let [shoppingList, setShoppingList] = useState([]);
+  let [newShoppingItem, setNewShoppingItem] = useState("");
+  let [newShoppingQuantity, setNewShoppingQuantity] = useState("");
+  let [newItemUnit, setNewItemUnit] = useState("");
 
   useEffect(() => {
     getShoppingList();
@@ -23,11 +26,51 @@ function App() {
       });
   };
 
+  const addShoppingItem = () => {
+    axios
+      .post("/shopping", {
+        item: newShoppingItem,
+        quantity: newShoppingQuantity,
+        unit: newItemUnit,
+      })
+      .then((response) => {
+        // clear inputs
+        setNewShoppingItem("");
+        setNewItemUnit("");
+        setNewShoppingQuantity("");
+
+        getShoppingList();
+      })
+      .catch((err) => {
+        alert("Error Adding Item");
+        console.log(err);
+      });
+  };
+
   return (
     <div className="App">
       <Header />
       <main>
-        <p>Under Construction...</p>
+        <h2>ADD AN ITEM</h2>
+        <form onSubmit={addShoppingItem}>
+          <input
+            value={newShoppingItem}
+            onChange={(e) => setNewShoppingItem(e.target.value)}
+            placeholder="Shopping Item"
+          />
+          <input
+            type="Number"
+            value={newShoppingQuantity}
+            onChange={(e) => setNewShoppingQuantity(e.target.value)}
+            placeholder="Quantity"
+          />
+          <input
+            value={newItemUnit}
+            onChange={(e) => setNewItemUnit(e.target.value)}
+            placeholder="Unit"
+          />
+          <button>Add To Cart</button>
+        </form>
       </main>
 
       <table>

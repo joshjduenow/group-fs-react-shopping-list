@@ -22,11 +22,12 @@ router.get('/', (req, res) => {
 // Setup a POST route to add a new guest to the database
 router.post('/', (req, res) => {
     const list = req.body;
-    const sqlText = `INSERT INTO shopping ("name", "quantity", "unit")
+    const sqlText = `INSERT INTO "shopping" ("name", "quantity", "unit")
                      VALUES ($1, $2, $3)`;
+                     console.log(req.body);
     // Let sql sanitize your inputs (NO Bobby Drop Tables here!)
     // the $1, $2, etc get substituted with the values from the array below
-    pool.query(sqlText, [list.name, list.quantity, list.unit])
+    pool.query(sqlText, [list.item, list.quantity, list.unit])
         .then((result) => {
             console.log(`Added shopping item to the database`, list);
             res.sendStatus(201);
