@@ -6,7 +6,7 @@ const pool = require('./modules/pool.js'); // Might mess up
 router.get('/', (req, res) => {
     // When you fetch all things in these GET routes, strongly encourage ORDER BY
     // so that things always come back in a consistent order 
-    const sqlText = `SELECT * FROM "shopping" ORDER BY "id";`;
+    const sqlText = `SELECT * FROM "shopping" ORDER BY "name";`;
     pool.query(sqlText)
         .then((result) => {
             console.log('Got stuff back from the database', result.rows);
