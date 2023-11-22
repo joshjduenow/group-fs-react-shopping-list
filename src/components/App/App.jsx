@@ -30,10 +30,6 @@ function App() {
       <Header />
       <AddItem getShoppingList={getShoppingList}/>
       <h2>Shopping List</h2>
-      <div>
-        <button>Reset</button>
-        <button>Clear Cart</button>
-      </div>
       <ShoppingList shoppingList={shoppingList}/>
     </div>
   );
